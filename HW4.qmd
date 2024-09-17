@@ -4,12 +4,12 @@ format: html
 editor: visual
 ---
 ## Calling Libraries
+
 ```{r}
 library(tidyverse)
-library(conflicted)
-
 library(lubridate)
-``````
+```
+
 
 ## Task1: Conceptual Questions
 
@@ -21,8 +21,19 @@ library(lubridate)
 ##Task 2: Reading Delimited Data
 
 ```{r}
-glass<- read.delim("https://www4.stat.ncsu.edu/online/datasets/glass.data",
-                    delim=",",
-                   col_names=c("ID","RI","Na","Mg","Al","Si","K","Ca","Ba","Fe"))
+glass<- read_delim("https://www4.stat.ncsu.edu/~online/datasets/glass.data",
+                   delim=",",
+                   col_names = c("ID","RI","Na","Mg","Al","Si","K","Ca","Ba","Fe","typ"))
+glass|> mutate(typ2=ifelse(glass$typ==1,"Building_Windows_float_processed",
+                ifelse(glass$typ==2,"Building_Windows_non_Float_Processed",
+                       
+                       
+                               ifelse(glass$typ==3,"Vehicle_Windows_Float_Processed",
+                                      ifelse(glass$typ==4,"Vehicle_Windows_Non_Float_Processed",
+                                             ifelse(glass$typ==5,"Containers",
+                                                    ifelse(glass$typ==6,"Tableware",
+                                                           ifelse(glass$typ==7,"Headlamps","Other"))))   )
+                           ) ))
+
 ```
 
