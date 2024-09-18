@@ -20,6 +20,8 @@ library(lubridate)
 
 ##Task 2: Reading Delimited Data
 
+### Glass Data 
+
 ```{r}
 glass<- read_delim("https://www4.stat.ncsu.edu/~online/datasets/glass.data",
                    delim=",",
@@ -33,7 +35,18 @@ glass|> mutate(typ2=ifelse(glass$typ==1,"Building_Windows_float_processed",
                                              ifelse(glass$typ==5,"Containers",
                                                     ifelse(glass$typ==6,"Tableware",
                                                            ifelse(glass$typ==7,"Headlamps","Other"))))   )
-                           ) ))
+                           ) ) ) |>
+  
+               filter(Fe <0.2 & (typ2=='Tableware' | typ2=='Headlamps'))
+
+```
+
+### Yeast Data
+
+```{r}
+yeast<-read_delim("https://www4.stat.ncsu.edu/online/datasets/yeast.data",delim = "..",col_names = c("seq_name","mcg","gvh","alm","mit","erl","pox","vac","nuc","class"))
+
+yeast
 
 ```
 
