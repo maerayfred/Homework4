@@ -8,6 +8,7 @@ editor: visual
 ```{r}
 library(tidyverse)
 library(lubridate)
+library(dplyr)
 ```
 
 
@@ -48,7 +49,11 @@ library(readr)
 yeast<-read_table("https://www4.stat.ncsu.edu/online/datasets/yeast.data", col_names=c("seq_name","mcg","gvh","alm","mit","erl","pox","vac","nuc","class")
 )
 
-yeast
+ 
+yeast |>
+  select(2:7,10) |>
+    group_by(class) |>
+  mutate(across(where(is.numeric),list(mean=mean, median=median), .names = "{.col}_{.fn}"))
 
 ```
 
