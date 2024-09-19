@@ -44,7 +44,9 @@ glass|> mutate(typ2=ifelse(glass$typ==1,"Building_Windows_float_processed",
 ### Yeast Data
 
 ```{r}
-yeast<-read_delim("https://www4.stat.ncsu.edu/online/datasets/yeast.data",delim = "..",col_names = c("seq_name","mcg","gvh","alm","mit","erl","pox","vac","nuc","class"))
+library(readr)
+yeast<-read_table("https://www4.stat.ncsu.edu/online/datasets/yeast.data", col_names=c("seq_name","mcg","gvh","alm","mit","erl","pox","vac","nuc","class")
+)
 
 yeast
 
