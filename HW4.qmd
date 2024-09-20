@@ -14,7 +14,7 @@ library(readr)
 ```
 
 
-## Task1: Conceptual Questions
+### Task1: Conceptual Questions
 
 1) The relative path would be ../mydata.csv
 
@@ -29,7 +29,7 @@ iris |>
    grep("^Petal",names(iris)) 
 
 
-##Task 2: Reading Delimited Data
+### Task 2: Reading Delimited Data
 
 ### Glass Data 
 
@@ -50,6 +50,9 @@ glass|> mutate(typ2=ifelse(glass$typ==1,"Building_Windows_float_processed",
   
                filter(Fe <0.2 & (typ2=='Tableware' | typ2=='Headlamps'))
 
+#Calling the tibble
+glass
+
 ```
 
 ### Yeast Data
@@ -58,8 +61,10 @@ glass|> mutate(typ2=ifelse(glass$typ==1,"Building_Windows_float_processed",
 library(readr)
 yeast<-read_table("https://www4.stat.ncsu.edu/online/datasets/yeast.data", col_names=c("seq_name","mcg","gvh","alm","mit","erl","pox","vac","nuc","class")
 )
+#Calling the tibble
+yeast
 
- 
+#Creating a Chain
 yeast |>
   select(2:7,10) |>
     group_by(class) |>
@@ -82,7 +87,7 @@ wnames<-read_excel("white-wine.xlsx",
 #Transposing the Names
 wnames2<-data.frame(t(sapply(wnames,c)))
 
-
+#Renaming
 colnames(wwine)<-wnames2
 
 wwine<-data_frame(wwine,type='White')
